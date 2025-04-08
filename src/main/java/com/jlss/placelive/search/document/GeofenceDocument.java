@@ -1,5 +1,6 @@
 package com.jlss.placelive.search.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -9,12 +10,13 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "geofences")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GeofenceDocument {
 
     @Id
-    private Long geofenceId;
+    private String geofenceId;
 
-    private long placeId;
+    private String  placeId;
 
     private double radius;
 

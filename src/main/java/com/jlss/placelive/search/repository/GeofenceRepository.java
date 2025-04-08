@@ -5,7 +5,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface GeofenceRepository extends ElasticsearchRepository<GeofenceDocument, Long> {
-    List<GeofenceDocument> findByPlaceId(Long id);
+public interface GeofenceRepository extends ElasticsearchRepository<GeofenceDocument, String> {
+    List<GeofenceDocument> findByPlaceId(String id);
     // Add custom query methods if needed
 }

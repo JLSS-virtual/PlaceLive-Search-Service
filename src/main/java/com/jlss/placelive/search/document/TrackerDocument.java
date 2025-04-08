@@ -1,5 +1,6 @@
 package com.jlss.placelive.search.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -11,13 +12,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "tracker")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TrackerDocument {
 
     /**
      * Tracker specific data
      **/
     @Id
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -34,11 +36,11 @@ public class TrackerDocument {
     /**
      * IDs
      **/
-    private Long geofenceId;
+    private String geofenceId;
 
-    private Long userId;
+    private String userId;
 
-    private Long placeId;
+    private String placeId;
 
     /**
      * Geofence-related data

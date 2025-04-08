@@ -1,9 +1,11 @@
 package com.jlss.placelive.search.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import javax.xml.transform.sax.SAXResult;
 import java.util.Date;
 import java.util.List;
 
@@ -12,10 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(indexName = "places")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceDocument {
 
     @Id
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -34,5 +37,5 @@ public class PlaceDocument {
 
     private List<String> tags; // Stored as list for filtering/searching
 
-    private Long ownerId;
+    private String ownerId;
 }

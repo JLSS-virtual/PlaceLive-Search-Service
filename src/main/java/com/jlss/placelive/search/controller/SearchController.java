@@ -7,12 +7,14 @@ import com.jlss.placelive.search.document.UserDocument;
 import com.jlss.placelive.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/api/elasticSearch")
+@RequestMapping("/api/elasticSearch")
+@Validated
 public class SearchController {
 
     private final SearchService searchService;
@@ -33,7 +35,7 @@ public class SearchController {
     @PutMapping("/place/{id}")
     public ResponseEntity<Void> updatePlace(@PathVariable Long id, @RequestBody PlaceDocument placeDocument) {
         // In this simple example, updating is just re-indexing the document.
-        placeDocument.setId(id);
+        placeDocument.setId(String.valueOf(id));
         searchService.indexPlace(placeDocument);
         return ResponseEntity.ok().build();
     }
@@ -52,7 +54,7 @@ public class SearchController {
 
     @PutMapping("/geofence/{id}")
     public ResponseEntity<Void> updateGeofence(@PathVariable Long id, @RequestBody GeofenceDocument geofenceDocument) {
-        geofenceDocument.setGeofenceId(id);
+        geofenceDocument.setGeofenceId(String.valueOf(id));
         searchService.indexGeofence(geofenceDocument);
         return ResponseEntity.ok().build();
     }
@@ -73,7 +75,7 @@ public class SearchController {
     @PutMapping("/user/{id}")
     public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserDocument userDocument) {
         // In this simple example, updating is just re-indexing the document.
-        userDocument.setId(id);
+        userDocument.setUserId(String.valueOf(id));
         searchService.indexUser(userDocument);
         return ResponseEntity.ok().build();
     }
@@ -95,7 +97,7 @@ public class SearchController {
     @PutMapping("/tracker/{id}")
     public ResponseEntity<Void> updateTracker(@PathVariable Long id, @RequestBody TrackerDocument trackerDocument) {
         // In this simple example, updating is just re-indexing the document.
-        trackerDocument.setId(id);
+        trackerDocument.setId(String.valueOf(id));
         searchService.indexTracker(trackerDocument);
         return ResponseEntity.ok().build();
     }
@@ -107,7 +109,7 @@ public class SearchController {
     }
 
     // Endpoint for user search queries
-    @GetMapping("/user")
+    @GetMapping("/search")
     public ResponseEntity<List<Object>> search(
             @RequestParam("q") String query,
             @RequestParam(value = "filter", required = false) String filter,

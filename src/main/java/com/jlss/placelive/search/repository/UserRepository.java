@@ -6,8 +6,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface UserRepository extends ElasticsearchRepository<UserDocument,Long> {
-    List<UserDocument> findFriendsByUserId(Long userId);
-
-    List<UserDocument> findByIdIn(List<Long> activeFriendIds);
+public interface UserRepository extends ElasticsearchRepository<UserDocument,String> {
+    List<UserDocument> findFriendsByUserId(String userId);
+    List<UserDocument> findByUserIdIn(List<String> followers);
 }
